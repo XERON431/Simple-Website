@@ -1,13 +1,14 @@
-// In app/layout.tsx
+import "@/app/globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <body>
-        <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
-          <a href="/" style={{ marginRight: '1rem' }}>Home</a>
-          <a href="/about">About</a>
-        </nav>
-        {children}
+    <html lang="en">
+      <body className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
