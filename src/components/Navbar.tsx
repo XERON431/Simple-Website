@@ -7,6 +7,7 @@ export default function Navbar() {
       <div className="space-x-4 text-blue-600">
         <Link href="/">Home</Link>
         <Link href="/about">About</Link>
+        <Link href="/game">Game</Link>
         <Link href="/campaigns">Campaigns</Link>
         <Link href="/donate">Donate</Link>
         <Link href="/contact">Contact</Link>
