@@ -6,9 +6,15 @@ const colors = ['red', 'blue', 'green', 'yellow'];
 export default function Game() {
   const [activeColor, setActiveColor] = useState('');
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [timer, setTimer] = useState(3);
   const [timeLeft, setTimeLeft] = useState(3);
+
+  useEffect(() => {
+    const storedHighScore = localStorage.getItem('highScore');
+    if (storedHighScore) setHighScore(Number(storedHighScore));
+  }, []);
 
   useEffect(() => {
     if (gameOver) return;
@@ -36,6 +42,13 @@ export default function Game() {
     };
   }, [score]);
 
+  useEffect(() => {
+    if (gameOver && score > highScore) {
+      setHighScore(score);
+      localStorage.setItem('highScore', score.toString());
+    }
+  }, [gameOver]);
+
   const handleClick = (color:any) => {
     if (color === activeColor) {
       setScore(score + 1);
@@ -56,6 +69,7 @@ export default function Game() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
       <h1 className="text-4xl font-bold mb-4">Color Dash</h1>
       <p className="mb-2">Score: {score}</p>
+      <p className="mb-2">High Score: {highScore}</p>
       <p className="mb-2">Time Left: {timeLeft.toFixed(1)}s</p>
       {!gameOver ? (
         <div className="grid grid-cols-2 gap-4 mt-4">
